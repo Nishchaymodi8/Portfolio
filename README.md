@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Alex James — Editorial Single-Page Portfolio
 
 An editorial, typography-driven, minimal personal portfolio website crafted with HTML5, CSS3, and Vanilla JavaScript. Features a signature pale-blue palette, high-contrast serif typography, spacious layout, dynamic portfolio grid, and a centralized configuration system.
@@ -202,3 +203,6 @@ This dynamically overrides the CSS variables on page load without touching `styl
 4. On GitHub, navigate to **Settings > Pages**.
 5. Under **Branch**, select `main` and root directory `/`, then click **Save**.
 6. Your portfolio will be live in 1-2 minutes at: `https://<your-username>.github.io/<repo-name>/`.
+=======
+# profile-website
+>>>>>>> e951d0f4664e5397465741c945260b2b6b0715fc
