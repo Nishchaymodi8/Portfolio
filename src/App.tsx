@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useMemo, useRef, useState, CSSProperties } from 'react';
-import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
+import { motion, useScroll, useTransform ,AnimatePresence , type MotionValue  } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import Lenis from 'lenis';
 
@@ -112,9 +112,28 @@ const Hero = () => (
 );
 
 const G = 'https://motionsites.ai/assets/hero-';
-const gifs = ['space-voyage-preview-eECLH3Yc','codenest-preview-Cgppc2qV','vex-ventures-preview-BczMFIiw','stellar-ai-v2-preview-DjvxjG3C','asme-preview-B_nGDnTP','transform-data-preview-Cx5OU29N','vitara-preview-Cjz2QYyU','terra-preview-BFjrCr7T','skyelite-preview-DHaZIgUv','aethera-preview-DknSlcTa','designpro-preview-D8c5_een','stellar-ai-preview-D3HL6bw1','xportfolio-preview-D4A8maiC','orbit-web3-preview-BXt4OttD','nexora-preview-cx5HmUgo','evr-ventures-preview-DZxeVFEX','planet-orbit-preview-DWAP8Z1P','new-era-preview-CocuDUm9','wealth-preview-B70idl_u','luminex-preview-CxOP7ce6','celestia-preview-0yO3jXO8'].map((s) => `${G}${s}.gif`);
-const row1 = gifs.slice(0, 11), row2 = gifs.slice(11);
+//const gifs = ['space-voyage-preview-eECLH3Yc','codenest-preview-Cgppc2qV','vex-ventures-preview-BczMFIiw','stellar-ai-v2-preview-DjvxjG3C','asme-preview-B_nGDnTP','transform-data-preview-Cx5OU29N','vitara-preview-Cjz2QYyU','terra-preview-BFjrCr7T','skyelite-preview-DHaZIgUv','aethera-preview-DknSlcTa','designpro-preview-D8c5_een','stellar-ai-preview-D3HL6bw1','xportfolio-preview-D4A8maiC','orbit-web3-preview-BXt4OttD','nexora-preview-cx5HmUgo','evr-ventures-preview-DZxeVFEX','planet-orbit-preview-DWAP8Z1P','new-era-preview-CocuDUm9','wealth-preview-B70idl_u','luminex-preview-CxOP7ce6','celestia-preview-0yO3jXO8'].map((s) => `${G}${s}.gif`);
+//const row1 = gifs.slice(0, 11), row2 = gifs.slice(11);
+const row1 = [
+  "/tech/python.svg",
+  "/tech/django.svg",
+  "/tech/react.svg",
+  "/tech/typescript.svg",
+  "/tech/nextdotjs.svg",
+  "/tech/javascript.svg",
+  "/tech/html5.svg",
+];
 
+const row2 = [
+  "/tech/postgresql.svg",
+  "/tech/mongodb.svg",
+  "/tech/mysql.svg",
+  "/tech/nodedotjs.svg",
+  "/tech/tailwindcss.svg",
+  "/tech/git.svg",
+  "/tech/github.svg",
+  "/tech/ollama.svg",
+];
 const Marquee = () => {
   const ref = useRef<HTMLElement>(null);
   const [offset, setOffset] = useState(0);
@@ -131,17 +150,28 @@ const Marquee = () => {
   const Row = ({ items, dx }: { items: string[]; dx: number }) => (
     <div className="flex gap-3 w-max" style={{ transform: `translateX(${dx}px)`, willChange: 'transform' }}>
       {[...items, ...items, ...items].map((u, i) => (
-        <img key={i} src={u} loading="lazy" alt="" className="rounded-2xl object-cover shrink-0" style={{ width: 420, height: 270 }} />
-      ))}
+<img
+  key={i}
+  src={u}
+  loading="lazy"
+  alt=""
+  className="shrink-0 object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
+  style={{ width: 80, height: 80 }}
+/>
+))}
     </div>
   );
   return (
-    <section ref={ref} className="bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden flex flex-col gap-3">
-      <Row items={row1} dx={offset - 200} />
-      <Row items={row2} dx={-(offset - 200)} />
-    </section>
-  );
+  <section
+    ref={ref}
+    className="bg-[#0C0C0C] pt-16 sm:pt-20 pb-28 sm:pb-36 overflow-hidden flex flex-col gap-8"
+  >
+    <Row items={row1} dx={offset - 200} />
+    <Row items={row2} dx={-(offset - 200)} />
+  </section>
+);
 };
+
 
 const CDN = 'https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/';
 const corners = [
@@ -150,53 +180,577 @@ const corners = [
   { src: 'lego_icon-1.703bb594.png', c: 'w-[120px] sm:w-[160px] md:w-[210px]', p: 'top-[4%] right-[1%] sm:right-[2%] md:right-[4%]', d: 0.15, x: 80 },
   { src: 'Group_134-1.2e04f3ce.png', c: 'w-[130px] sm:w-[170px] md:w-[220px]', p: 'bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%]', d: 0.3, x: 80 },
 ];
-const About = () => (
-  <section id="about" className="relative min-h-screen flex flex-col items-center justify-center px-5 sm:px-8 md:px-10 py-20 gap-16 sm:gap-20 md:gap-24">
-    {corners.map((c) => (
-      <div key={c.src} className={`absolute ${c.p}`}>
-        <FadeIn delay={c.d} x={c.x} y={0} duration={0.9}><img src={CDN + c.src} alt="" className={c.c} /></FadeIn>
-      </div>
-    ))}
-    <div className="flex flex-col items-center gap-10 sm:gap-14 md:gap-16 relative z-[1]">
-      <FadeIn y={40}><h2 className="hero-heading font-black uppercase leading-none tracking-tight text-center" style={bigHead}>About me</h2></FadeIn>
-      <AnimatedText className="text-[#D7E2EA] font-medium text-center leading-relaxed max-w-[560px]" style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
-        text="With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let's build something incredible together!" />
-    </div>
-    <div className="relative z-[1]"><ContactButton /></div>
-  </section>
-);
 
-const services = [
-  ['3D Modeling', 'Creation of detailed objects, characters, or environments tailored to specific client needs, ideal for games, products, and visualizations.'],
-  ['Rendering', 'High-quality, photorealistic renders that showcase designs with custom lighting, textures, and materials to bring concepts to life.'],
-  ['Motion Design', 'Dynamic animations and motion graphics that add energy and storytelling to brands, products, and digital experiences.'],
-  ['Branding', 'Crafting cohesive visual identities -- from logos to full brand systems -- that communicate a clear and memorable presence.'],
-  ['Web Design', 'Designing clean, modern, and conversion-focused websites with attention to layout, typography, and user experience.'],
-];
-const ServiceItem = ({ n, d, i, last }: { n: string; d: string; i: number; last: boolean }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.98', 'start 0.7'] });
-  const opacity = useTransform(scrollYProgress, [0, 1], [0.12, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], [50, 0]);
+
+const About = () => {
+  const [flipped, setFlipped] = useState(false);
+
+  const skills = ["Python", "Django", "React", "PostgreSQL"];
+
   return (
-    <motion.div ref={ref} style={{ opacity, y, borderTop: '1px solid rgba(12, 12, 12, 0.15)', borderBottom: last ? '1px solid rgba(12, 12, 12, 0.15)' : undefined }}
-      className="flex items-start gap-4 sm:gap-8 md:gap-12 py-8 sm:py-10 md:py-12 text-[#0C0C0C]">
-      <span className="font-black leading-none shrink-0" style={{ ...bigNum, minWidth: 'clamp(4.5rem, 14vw, 200px)' }}>{`0${i + 1}`}</span>
-      <div className="flex flex-col gap-2 sm:gap-3">
-        <h3 className="font-medium uppercase leading-none" style={{ fontSize: 'clamp(1rem, 2.2vw, 2.1rem)' }}>{n}</h3>
-        <p className="font-light leading-relaxed max-w-2xl opacity-60" style={{ fontSize: 'clamp(0.85rem, 1.6vw, 1.25rem)' }}>{d}</p>
+    <section
+      id="about"
+      className="bg-[#0C0C0C] px-3 pb-8 sm:px-5"
+    >
+      {/* Main rounded panel */}
+      <div className="relative overflow-hidden rounded-[28px] bg-[#E8EAED] text-[#111827] sm:rounded-[40px]">
+
+        {/* Header */}
+        <div className="flex items-center justify-between gap-4 px-6 pt-7 sm:px-10 sm:pt-9">
+          <span className="text-xs tracking-[0.35em] text-[#918674]">
+            NM / PORTFOLIO
+          </span>
+          <span className="text-right text-xs text-[#6F6A62] sm:text-sm">
+            ABOUT THE DEVELOPER
+          </span>
+        </div>
+
+        {/* Three-column layout */}
+        <div className="grid grid-cols-1 items-center gap-14 px-6 py-14 sm:px-10 sm:py-20 lg:grid-cols-[minmax(0,1fr)_290px_minmax(0,1fr)] lg:gap-10 lg:px-12 lg:py-24">
+
+          {/* LEFT: Introduction */}
+          <div className="order-1 flex min-w-0 flex-col items-start">
+            <p className="mb-5 text-xs tracking-[0.35em] text-[#918674]">
+              ABOUT
+            </p>
+
+            <h2 className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl xl:text-6xl">
+              Hi, I'm
+              <br />
+              <span className="font-serif font-normal italic">
+                Nishchay.
+              </span>
+            </h2>
+
+            <p className="mt-6 max-w-md text-base leading-relaxed text-[#696761] sm:text-lg">
+              An MCA student and full-stack developer who enjoys
+              building useful web applications, designing backend
+              systems, and exploring AI-powered developer tools.
+            </p>
+
+            <p className="mt-4 max-w-md font-serif text-base leading-relaxed text-[#77736B]">
+              I like turning ideas into working products, from
+              database design and APIs to clean user interfaces.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href="https://www.linkedin.com/in/nishchaymodi/"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-[#C8C1B5] px-5 py-3 text-sm transition-colors hover:bg-black/5 sm:px-6"
+              >
+                LinkedIn ↗
+              </a>
+
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full bg-[#111827] px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-[#293449] sm:px-6"
+              >
+                Resume ↗
+              </a>
+
+              <a
+                href="https://github.com/Nishchaymodi8"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-[#C8C1B5] px-5 py-3 text-sm transition-colors hover:bg-black/5 sm:px-6"
+              >
+                GitHub ↗
+              </a>
+            </div>
+          </div>
+
+          {/* CENTER: Hanging ID card */}
+          <div className="order-2 flex min-w-0 flex-col items-center">
+
+            {/* Lanyard and card */}
+            <div className="relative flex flex-col items-center pt-[90px]">
+            
+
+{/* Moving strap and connector */}
+<motion.div
+  aria-hidden="true"
+  className="absolute top-0 z-20 flex flex-col items-center"
+  animate={
+    flipped
+      ? {
+          left: "50%",
+          x: [-15, -27, -7, -15],
+          y: [0, -8, 4, 0],
+          rotateZ: [0, -5, 3, 0],
+        }
+      : {
+          left: "50%",
+          x: [-15, -5, -21, -15],
+          y: [0, -6, 3, 0],
+          rotateZ: [0, 4, -2, 0],
+        }
+  }
+  transition={{
+    left: { duration: 0 },
+    x: { duration: 0.85, ease: "easeOut" },
+    y: { duration: 0.85, ease: "easeOut" },
+    rotateZ: { duration: 0.85, ease: "easeOut" },
+  }}
+  style={{
+    width: "30px",
+    transformOrigin: "50% 100%",
+  }}
+>
+  {/* Stitched portfolio strap */}
+  <div className="flex h-[76px] w-[30px] flex-col items-center border-x-2 border-dotted border-[#8C91A2] bg-[#171C30]">
+    <span
+      className="mt-2 text-[7px] font-bold tracking-[2px] text-[#E7E8EE]"
+      style={{ writingMode: "vertical-rl" }}
+    >
+      - - - - - -
+    </span>
+  </div>
+
+  {/* Metal connector */}
+  <div className="-mt-[11px] flex h-[20px] w-[32px] items-center justify-center rounded-md border border-[#AEB3BA] bg-gradient-to-b from-[#F1F2F3] via-[#C5C8CD] to-[#969BA2] shadow-sm">
+    <div className="h-[10px] w-[20px] rounded-sm border border-[#A1A5AA] bg-[#D7D9DC]" />
+  </div>
+
+  {/* Small connecting loop */}
+  <div className="-mt-[5px] h-[12px] w-[12px] rounded-b-full border-[2px] border-t-0 border-[#A9ADB3]" />
+</motion.div>
+
+
+
+
+
+              {/* 3D perspective wrapper */}
+              <div
+                className="relative z-10 h-[420px] w-[270px] sm:h-[440px] sm:w-[290px]"
+                style={{ perspective: "1100px" }}
+              >
+                <motion.div
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Flip developer ID card"
+                  onClick={() => setFlipped((value) => !value)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setFlipped((value) => !value);
+                    }
+                  }}
+                  className="absolute inset-0 cursor-pointer rounded-[22px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#C59B45]"
+                  animate={
+                    flipped
+                      ? {
+                          rotateY: 180,
+                          rotateX: [0, -12, 8, 0],
+                          rotateZ: [0, -5, 3, 0],
+                          x: [0, -12, 8, 0],
+                          y: [0, -8, 4, 0],
+                        }
+                      : {
+                          rotateY: 0,
+                          rotateX: [0, 10, -6, 0],
+                          rotateZ: [0, 4, -2, 0],
+                          x: [0, 10, -6, 0],
+                          y: [0, -6, 3, 0],
+                        }
+                  }
+                  transition={{
+                    rotateY: {
+                      type: "spring",
+                      stiffness: 75,
+                      damping: 13,
+                      mass: 1.1,
+                    },
+                    rotateX: { duration: 0.85, ease: "easeOut" },
+                    rotateZ: { duration: 0.85, ease: "easeOut" },
+                    x: { duration: 0.85, ease: "easeOut" },
+                    y: { duration: 0.85, ease: "easeOut" },
+                  }}
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+
+                  {/* FRONT FACE */}
+                  <div
+                    className="absolute inset-0 flex flex-col overflow-hidden rounded-[22px] border border-[#D9DDE3] bg-white shadow-[0_22px_45px_rgba(0,0,0,0.18)]"
+                    style={{ backfaceVisibility: "hidden" }}
+                  >
+                    <div className="flex items-center gap-3 bg-[#111827] px-5 py-5 text-white">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E8EAED] text-sm font-bold text-[#111827]">
+                        NM
+                      </div>
+
+                      <div>
+                        <p className="text-sm font-bold tracking-wide">
+                          DEVELOPER ID
+                        </p>
+                        <p className="text-[10px] text-white/60">
+                          PORTFOLIO · 2026
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-1 flex-col items-center px-5 pt-6">
+                      {/* Photo placeholder */}
+                      <div className="flex h-[125px] w-[112px] items-center justify-center overflow-hidden rounded-xl border-2 border-[#D9DDE3] bg-[#E8EAED]">
+                        <span className="font-serif text-5xl text-[#111827]">
+                          N
+                        </span>
+                      </div>
+
+                      <h3 className="mt-4 text-center text-lg font-bold tracking-tight">
+                        NISHCHAY MODI
+                      </h3>
+
+                      <p className="mt-1 text-center text-xs text-[#777B83]">
+                        Full Stack Developer
+                      </p>
+
+                      <div className="mt-6 grid w-full grid-cols-2 gap-3 border-t border-[#E5E7EB] pt-4">
+                        <div>
+                          <p className="text-[9px] tracking-wider text-[#858A93]">
+                            ID NUMBER
+                          </p>
+                          <p className="mt-1 text-xs font-medium">
+                            NM-2026
+                          </p>
+                        </div>
+
+                        <div>
+                          <p className="text-[9px] tracking-wider text-[#858A93]">
+                            EDUCATION
+                          </p>
+                          <p className="mt-1 text-xs font-medium">
+                            MCA · 2027
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Decorative barcode */}
+                      <div
+                        aria-hidden="true"
+                        className="mt-auto mb-5 h-8 w-full opacity-75"
+                        style={{
+                          backgroundImage:
+                            "repeating-linear-gradient(90deg,#111827 0px,#111827 2px,transparent 2px,transparent 4px,#111827 4px,#111827 5px,transparent 5px,transparent 8px)",
+                        }}
+                      />
+                    </div>
+
+                    <span className="absolute bottom-2 right-3 text-[9px] tracking-wide text-[#858A93]">
+                      CLICK TO FLIP ↻
+                    </span>
+                  </div>
+
+                  {/* BACK FACE */}
+                  <div
+                    className="absolute inset-0 flex flex-col overflow-hidden rounded-[22px] border border-[#D9DDE3] bg-white p-5 shadow-[0_22px_45px_rgba(0,0,0,0.18)] sm:p-6"
+                    style={{
+                      backfaceVisibility: "hidden",
+                      transform: "rotateY(180deg)",
+                    }}
+                  >
+                    <p className="text-[10px] tracking-[0.25em] text-[#858A93]">
+                      PROFILE / 02
+                    </p>
+
+                    <h3 className="mt-4 text-2xl font-semibold leading-tight">
+                      What I
+                      <br />
+                      <span className="font-serif font-normal italic">
+                        work on.
+                      </span>
+                    </h3>
+
+                    <div className="mt-6 space-y-4 text-sm">
+                      {[
+                        "Full-stack web applications",
+                        "Backend APIs and databases",
+                        "AI-powered developer tools",
+                        "Problem solving and system design",
+                      ].map((item) => (
+                        <div key={item} className="flex items-start gap-3">
+                          <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#111827] text-[10px] text-white">
+                            ✓
+                          </span>
+                          <span className="text-[#454B55]">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                      
+
+                    <p className="mt-auto pt-5 font-serif text-sm italic text-[#777B83]">
+                      Building useful things, one idea at a time.
+                    </p>
+
+                    <span className="absolute bottom-2 right-3 text-[9px] tracking-wide text-[#858A93]">
+                      CLICK TO RETURN ↻
+                    </span>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            <p className="mt-6 text-center text-[10px] tracking-[0.2em] text-[#858A93]">
+              CLICK THE CARD TO DISCOVER MORE
+            </p>
+          </div>
+
+          {/* RIGHT: Quick facts */}
+          <div className="order-3 flex min-w-0 flex-col">
+            <p className="mb-5 text-xs tracking-[0.3em] text-[#918674]">
+              QUICK FACTS
+            </p>
+
+            {[
+              ["Based in", "Ahmedabad, India"],
+              ["Studying", "MCA · GLS University"],
+              ["Graduation", "2027"],
+              ["Focus", "Full Stack & AI Tools"],
+            ].map(([label, value]) => (
+              <div
+                key={label}
+                className="flex items-start justify-between gap-4 border-b border-[#DDD5C8] py-4"
+              >
+                <span className="text-sm text-[#858078]">
+                  {label}
+                </span>
+                <span className="text-right text-sm font-medium">
+                  {value}
+                </span>
+              </div>
+            ))}
+
+            <blockquote className="mt-8 border-l-2 border-[#C9A24A] pl-5 font-serif text-xl italic leading-relaxed text-[#77736B]">
+              “Learning by building. Improving with every project.”
+            </blockquote>
+          </div>
+
+        </div>
+
+        {/* Footer spacing */}
+        <div className="h-4 sm:h-6" />
       </div>
-    </motion.div>
+    </section>
   );
 };
-const Services = () => (
-  <section id="price" className="bg-white rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32">
-    <FadeIn y={40}><h2 className="text-[#0C0C0C] font-black uppercase text-center mb-16 sm:mb-20 md:mb-28 leading-none" style={bigHead}>Services</h2></FadeIn>
-    <div className="max-w-5xl mx-auto">
-      {services.map(([n, d], i) => <ServiceItem key={n} n={n} d={d} i={i} last={i === services.length - 1} />)}
-    </div>
-  </section>
-);
+
+
+
+const stackElements = [
+  { number: "01", symbol: "Py", name: "Python", group: "Languages", level: "Core", position: "lg:col-start-1 lg:row-start-1" },
+  { number: "02", symbol: "Js", name: "JavaScript", group: "Languages", level: "Core", position: "lg:col-start-2 lg:row-start-1" },
+  { number: "03", symbol: "Ts", name: "TypeScript", group: "Languages", level: "Working", position: "lg:col-start-3 lg:row-start-1" },
+  { number: "04", symbol: "Ht", name: "HTML", group: "Frontend", level: "Core", position: "lg:col-start-4 lg:row-start-1" },
+  { number: "05", symbol: "Cs", name: "CSS", group: "Frontend", level: "Core", position: "lg:col-start-5 lg:row-start-1" },
+  { number: "06", symbol: "Re", name: "React", group: "Frontend", level: "Working", position: "lg:col-start-6 lg:row-start-1" },
+  { number: "07", symbol: "Nx", name: "Next.js", group: "Frontend", level: "Working", position: "lg:col-start-1 lg:row-start-2" },
+
+  { number: "08", symbol: "Dj", name: "Django", group: "Backend", level: "Core", position: "lg:col-start-2 lg:row-start-2" },
+  { number: "09", symbol: "DR", name: "REST API", group: "Backend", level: "Working", position: "lg:col-start-3 lg:row-start-2" },
+  { number: "10", symbol: "Nd", name: "Node.js", group: "Backend", level: "Learning", position: "lg:col-start-4 lg:row-start-2" },
+  
+  { number: "11", symbol: "Pg", name: "PostgreSQL", group: "Databases", level: "Working", position: "lg:col-start-5 lg:row-start-2" },
+  { number: "12", symbol: "Mo", name: "MongoDB", group: "Databases", level: "Working", position: "lg:col-start-6 lg:row-start-2" },
+  { number: "13", symbol: "My", name: "MySQL", group: "Databases", level: "Learning", position: "lg:col-start-1 lg:row-start-3" },
+  { number: "14", symbol: "Sq", name: "SQLite", group: "Databases", level: "Learning", position: "lg:col-start-2 lg:row-start-3" },
+  { number: "15", symbol: "Ch", name: "Chroma", group: "AI / Concepts", level: "Working", position: "lg:col-start-3 lg:row-start-3" },
+  { number: "16", symbol: "Pv", name: "pgvector", group: "AI / Concepts", level: "Working", position: "lg:col-start-4 lg:row-start-3" },
+  { number: "17", symbol: "Rg", name: "RAG", group: "AI / Concepts", level: "Working", position: "lg:col-start-5 lg:row-start-3" },
+  { number: "18", symbol: "Ol", name: "Ollama", group: "AI / Concepts", level: "Core", position: "lg:col-start-6 lg:row-start-3" },
+  { number: "19", symbol: "Eb", name: "Embeddings", group: "AI / Concepts", level: "Core", position: "lg:col-start-1 lg:row-start-4" },
+  { number: "20", symbol: "Vs", name: "Vector Search", group: "AI / Concepts", level: "Learning", position: "lg:col-start-2 lg:row-start-4" },
+
+];
+
+const stackGroups = [
+  { name: "Languages", color: "#060606" },
+  { name: "Frontend", color: "#6A6A6A" },
+  { name: "Backend", color: "#898989" },
+  { name: "Databases", color: "#BFBFBF" },
+  { name: "AI / Concepts", color: "#D8D8D8" },
+];
+
+const stackShades = [
+  "#060606",
+  "#292929",
+  "#454545",
+  "#6A6A6A",
+  "#858585",
+  "#A0A0A0",
+  "#BFBFBF",
+  "#CBCBCB",
+  "#D8D8D8",
+  "#E5E2DC",
+  "#F7F5F0",
+];
+
+const StackElement = ({
+  element,
+  index,
+  activeFilter,
+  selected,
+  onSelect,
+}: {
+  element: (typeof stackElements)[number];
+  index: number;
+  activeFilter: string;
+  selected: boolean;
+  onSelect: () => void;
+}) => {
+  const matches = activeFilter === "All" || element.group === activeFilter;
+  const shade = stackShades[
+    Math.round((index / (stackElements.length - 1)) * (stackShades.length - 1))
+  ];
+  const isDark = index < 5;
+
+  return (
+    <motion.button
+      type="button"
+      layout
+      onClick={onSelect}
+      aria-pressed={selected}
+      whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.97 }}
+      animate={{
+        opacity: matches ? 1 : 0.2,
+        scale: selected ? 1.035 : 1,
+      }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className={`relative flex min-h-[112px] flex-col items-start overflow-hidden rounded-[9px] border p-3 text-left sm:min-h-[132px] sm:p-4 ${element.position}`}
+      style={{
+        backgroundColor: selected ? "#6A6A6A" : shade,
+        borderColor: selected ? "#060606" : "rgba(6,6,6,0.12)",
+        color: selected || isDark ? "#FFFFFF" : "#060606",
+        boxShadow: selected ? "0 0 0 2px #060606" : "none",
+      }}
+    >
+      <span className="text-[9px] tracking-widest opacity-70">
+        {element.number}
+      </span>
+
+      <span className="mt-1 text-3xl font-semibold leading-none tracking-tight sm:text-4xl">
+        {element.symbol}
+      </span>
+
+      <span className="mt-auto pt-3 text-[10px] font-semibold sm:text-xs">
+        {element.name}
+      </span>
+
+      <span className="mt-1 text-[8px] uppercase tracking-wider opacity-70 sm:text-[9px]">
+        {selected ? element.level : element.group}
+      </span>
+    </motion.button>
+  );
+};
+
+const Services = () => {
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [selectedElement, setSelectedElement] = useState<string | null>(null);
+
+  const filters = ["All", ...stackGroups.map((group) => group.name)];
+
+  return (
+    <section
+      id="price"
+      className="rounded-t-[40px] bg-[#F7F5F0] px-5 py-20 text-[#060606] sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32"
+    >
+      <div className="mx-auto max-w-7xl">
+        <FadeIn y={40}>
+          <div className="mb-10 sm:mb-14">
+            <p className="mb-5 text-[10px] font-medium uppercase tracking-[0.28em] text-[#6A6A6A] sm:text-xs">
+              Skills / 03
+            </p>
+
+            <h2
+              className="max-w-5xl font-black leading-[0.96] tracking-tight"
+              style={{ fontSize: "clamp(2.5rem, 7vw, 6.5rem)" }}
+            >
+              The periodic table
+              <br />
+              <span className="font-serif font-normal italic">
+                of my stack.
+              </span>
+            </h2>
+
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-[#6A6A6A] sm:text-base">
+              {String(
+              activeFilter === "All"
+                ? stackElements.length
+                : stackElements.filter((item) => item.group === activeFilter)
+                    .length
+            ).padStart(2, "0")}{" "}
+            elements {activeFilter === "All" ? "in my stack" : `· ${activeFilter}`} elements in my stack. Select a family to explore the
+              technologies I use to build applications and developer tools.
+            </p>
+          </div>
+        </FadeIn>
+
+        {/* Category filters */}
+        <div className="mb-7 flex flex-wrap gap-2 sm:mb-9">
+          {filters.map((filter) => {
+            const isActive = activeFilter === filter;
+            const color =
+              stackGroups.find((group) => group.name === filter)?.color ??
+              "#060606";
+
+            return (
+              <button
+                key={filter}
+                type="button"
+                onClick={() => setActiveFilter(filter)}
+                aria-pressed={isActive}
+                className="flex items-center gap-2 rounded-full border px-3 py-2 text-[10px] font-medium transition-all duration-200 sm:text-xs"
+                style={{
+                  borderColor: isActive ? "#060606" : "#D8D8D8",
+                  backgroundColor: isActive ? "#060606" : "transparent",
+                  color: isActive ? "#F7F5F0" : "#6A6A6A",
+                }}
+              >
+                {filter !== "All" && (
+                  <span
+                    className="h-2 w-2 rounded-full"
+                    style={{
+                      backgroundColor: isActive ? "#F7F5F0" : color,
+                    }}
+                  />
+                )}
+                {filter}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Periodic table: staggered on desktop */}
+        <motion.div
+          layout
+          className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-6 lg:grid-rows-4 lg:gap-3"
+        >
+          {stackElements.map((element, index) => (
+            <StackElement
+              key={element.number}
+              element={element}
+              index={index}
+              activeFilter={activeFilter}
+              selected={selectedElement === element.number}
+              onSelect={() =>
+                setSelectedElement((current) =>
+                  current === element.number ? null : element.number
+                )
+              }
+            />
+          ))}
+        </motion.div>
+
+       
+      </div>
+    </section>
+  );
+};
+
 
 const img = (id: string) => `https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_${id}.png&w=1280&q=85`;
 const projects = [
