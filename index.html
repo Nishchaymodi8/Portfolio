@@ -1,4 +1,4 @@
-
+```html
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,7 +14,19 @@
     <meta name="author" content="Nishchay Modi" />
     <meta name="theme-color" content="#0C0C0C" />
 
+    <!-- Browser tab icon -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="%BASE_URL%favicon.png"
+    />
+
+    <!-- Open Graph: WhatsApp, LinkedIn, Facebook, etc. -->
     <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://nishchaymodi8.github.io/Portfolio/"
+    />
     <meta
       property="og:title"
       content="Nishchay Modi | Full-Stack Developer"
@@ -23,11 +35,27 @@
       property="og:description"
       content="Thoughtful code. Meaningful impact. Explore my projects in full-stack development and AI."
     />
+    <meta
+      property="og:image"
+      content="https://nishchaymodi8.github.io/Portfolio/social-preview.png?v=3"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
 
-    <link
-      rel="icon"
-      type="image/png"
-      href="%BASE_URL%favicon.png"
+    <!-- X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Nishchay Modi | Full-Stack Developer"
+    />
+    <meta
+      name="twitter:description"
+      content="Thoughtful code. Meaningful impact. Explore my projects in full-stack development and AI."
+    />
+    <meta
+      name="twitter:image"
+      content="https://nishchaymodi8.github.io/Portfolio/social-preview.png?v=3"
     />
   </head>
 
@@ -36,3 +64,4 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+```
