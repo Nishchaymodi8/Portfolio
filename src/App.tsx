@@ -200,34 +200,37 @@ const About = () => {
               database design and APIs to clean user interfaces.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="https://www.linkedin.com/in/nishchaymodi/"
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full border border-[#C8C1B5] px-5 py-3 text-sm transition-colors hover:bg-black/5 sm:px-6"
-              >
-                LinkedIn ↗
-              </a>
+<div className="mt-8 flex flex-wrap gap-4">
+  {/* LinkedIn */}
+  <a
+    href="https://www.linkedin.com/in/nishchaymodi/"
+    target="_blank"
+    rel="noreferrer"
+    className="retro-button retro-button--medium"
+  >
+    LinkedIn ↗
+  </a>
 
-              <a
-                href="https://drive.google.com/file/d/1F4yCtidjPelVgV1LWOjTaO12_jmB2Xda/view?usp=drive_link"
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full bg-[#111827] px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-[#293449] sm:px-6"
-              >
-                Resume ↗
-              </a>
+  {/* Resume: primary action */}
+  <a
+    href="https://drive.google.com/file/d/19RVUJrxYEwGN4s-vsMmZKMSqbHhC-R6o/view?usp=drive_link"
+    target="_blank"
+    rel="noreferrer"
+    className="retro-button retro-button--dark"
+  >
+    Resume ↗
+  </a>
 
-              <a
-                href="https://github.com/Nishchaymodi8"
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full border border-[#C8C1B5] px-5 py-3 text-sm transition-colors hover:bg-black/5 sm:px-6"
-              >
-                GitHub ↗
-              </a>
-            </div>
+  {/* GitHub */}
+  <a
+    href="https://github.com/Nishchaymodi8"
+    target="_blank"
+    rel="noreferrer"
+    className="retro-button retro-button--light"
+  >
+    GitHub ↗
+  </a>
+</div>
           </div>
 
           {/* CENTER: Hanging ID card */}
@@ -790,12 +793,13 @@ className={`flex h-full w-full items-stretch overflow-hidden border border-[#D7E
         >
           {/* Project screenshot */}
           <div className="relative overflow-hidden rounded-2xl bg-[#171717]">
-            <img
-              src={p.image}
-              alt={`${p.name} project screenshot`}
-              loading={i === 0 ? "eager" : "lazy"}
-className="h-full min-h-[280px] w-full object-cover md:min-h-0"            />
-          </div>
+  <img
+    src={p.image}
+    alt={`${p.name} project screenshot`}
+    loading={i === 0 ? "eager" : "lazy"}
+    className="block h-auto w-full object-contain"
+  />
+</div>
 
           {/* Project details */}
           <div className="flex min-w-0 flex-col justify-center text-[#D7E2EA]">
