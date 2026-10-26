@@ -77,22 +77,33 @@ const LiveProjectButton = () => (
   </button>
 );
 
+
 const bigNum: CSSProperties = { fontSize: 'clamp(3rem, 10vw, 140px)' };
 const bigHead: CSSProperties = { fontSize: 'clamp(3rem, 12vw, 160px)' };
 
 /* ---------- sections ---------- */
 const Hero = () => (
-  <section className="relative h-screen flex flex-col overflow-x-clip">
-    <FadeIn y={-20}>
-      <nav className="flex justify-between px-6 md:px-10 pt-6 md:pt-8 text-[#D7E2EA] font-medium uppercase tracking-wider text-sm md:text-lg lg:text-[1.4rem]">
-        {['About', 'Price', 'Projects', 'Contact'].map((l) => (
-          <a key={l} href={`#${l.toLowerCase()}`} className="hover:opacity-70 transition-opacity duration-200">{l}</a>
-        ))}
-      </nav>
-    </FadeIn>
+<section className="relative h-[72vh] min-h-[360px] sm:h-[70vh] md:h-[80vh] flex flex-col overflow-x-clip">   <FadeIn y={-20}>
+  <nav className="flex justify-between px-6 md:px-10 pt-6 md:pt-8 text-[#D7E2EA] font-medium uppercase tracking-wider text-sm md:text-lg lg:text-[1.4rem]">
+    {[
+      { label: "About", id: "about" },
+      { label: "Skills", id: "price" },
+      { label: "Projects", id: "projects" },
+      { label: "Contact", id: "contact" },
+    ].map(({ label, id }) => (
+      <a
+        key={label}
+        href={`#${id}`}
+        className="hover:opacity-70 transition-opacity duration-200"
+      >
+        {label}
+      </a>
+    ))}
+  </nav>
+</FadeIn>
     <div className="overflow-hidden">
       <FadeIn delay={0.6} y={30}>
-        <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full mt-6 sm:mt-4 md:-mt-5 text-[14vw] sm:text-[15vw] md:text-[16vw] lg:text-[17.5vw]">
+        <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full mt-8 sm:mt-4 md:-mt-5 text-[18.5vw] sm:text-[15vw] md:text-[16vw] lg:text-[17.5vw]">
           Nishchay
         </h1>
       </FadeIn>
@@ -100,13 +111,14 @@ const Hero = () => (
     <div className="absolute left-1/2 -translate-x-1/2 z-10 top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0">
       
     </div>
-    <div className="mt-auto flex justify-between items-end px-6 md:px-10 pb-7 sm:pb-8 md:pb-10">
-      <FadeIn delay={0.35} y={20}>
-        <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[160px] sm:max-w-[220px] md:max-w-[260px]" style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}>
-          a Full Stack developer driven by crafting striking and unforgettable projects
+    <div className="mt-auto flex justify-between items-end px-6 md:px-10 pb-5 sm:pb-8 md:pb-10">
+      <FadeIn delay={0.25} y={20}>
+        <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[250px] sm:max-w-[220px] md:max-w-[260px]" style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}>
+          a Full Stack developer
+          <br></br> Thoughtful code.
+          <br></br> Meaningful impact.
         </p>
       </FadeIn>
-      <FadeIn delay={0.5} y={20}><ContactButton /></FadeIn>
     </div>
   </section>
 );
@@ -156,16 +168,17 @@ const Marquee = () => {
   loading="lazy"
   alt=""
   className="shrink-0 object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity duration-300"
-  style={{ width: 80, height: 80 }}
-/>
+style={{
+  width: "clamp(42px, 12vw, 80px)",
+  height: "clamp(42px, 12vw, 80px)",
+}}/>
 ))}
     </div>
   );
   return (
   <section
     ref={ref}
-    className="bg-[#0C0C0C] pt-16 sm:pt-20 pb-28 sm:pb-36 overflow-hidden flex flex-col gap-8"
-  >
+className="bg-[#0C0C0C] pt-6 sm:pt-20 pb-12 sm:pb-36 overflow-hidden flex flex-col gap-5 sm:gap-8"  >
     <Row items={row1} dx={offset - 200} />
     <Row items={row2} dx={-(offset - 200)} />
   </section>
@@ -244,7 +257,7 @@ const About = () => {
               </a>
 
               <a
-                href="/resume.pdf"
+                href="https://drive.google.com/file/d/1F4yCtidjPelVgV1LWOjTaO12_jmB2Xda/view?usp=drive_link"
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-full bg-[#111827] px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-[#293449] sm:px-6"
@@ -394,11 +407,13 @@ const About = () => {
 
                     <div className="flex flex-1 flex-col items-center px-5 pt-6">
                       {/* Photo placeholder */}
-                      <div className="flex h-[125px] w-[112px] items-center justify-center overflow-hidden rounded-xl border-2 border-[#D9DDE3] bg-[#E8EAED]">
-                        <span className="font-serif text-5xl text-[#111827]">
-                          N
-                        </span>
-                      </div>
+                      <div className="flex h-[125px] w-[112px] items-center  justify-center overflow-hidden rounded-xl border-2 border-[#D9DDE3] bg-[#E8EAED]">
+  <img
+    src="/card/id2.jpg"
+    alt="Nishchay Modi"
+    className="h-full w-full object-cover  object-top"
+  />
+</div>
 
                       <h3 className="mt-4 text-center text-lg font-bold tracking-tight">
                         NISHCHAY MODI
@@ -752,52 +767,276 @@ const Services = () => {
 };
 
 
-const img = (id: string) => `https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_${id}.png&w=1280&q=85`;
-const projects = [
-  { name: 'Nextlevel Studio', cat: 'Client', a: '20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db', b: '20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8', c: '20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327' },
-  { name: 'Aura Brand Identity', cat: 'Personal', a: '20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f', b: '20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1', c: '20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea' },
-  { name: 'Solaris Digital', cat: 'Client', a: '20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f', b: '20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b', c: '20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee' },
-];
-const R = 'rounded-[40px] sm:rounded-[50px] md:rounded-[60px]';
 
-const Card = ({ p, i, n, progress }: { p: typeof projects[number]; i: number; n: number; progress: MotionValue<number> }) => {
-  const target = 1 - (n - 1 - i) * 0.03;
-  const scale = useTransform(progress, [i / n, 1], [1, target]);
+const portfolioProjects  = [
+  {
+    name: "CodeAtlas",
+    cat: "AI / DEVELOPER TOOLS",
+    description:
+      "An AI-powered codebase intelligence tool for repository chat, code summarization, and architecture analysis using RAG.",
+    image: "/images/projects/codeatlas.png",
+    layout: "image-left",
+  },
+  {
+    name: "InstaBazaar",
+    cat: "SOCIAL COMMERCE",
+    description:
+      "A marketplace for Instagram sellers that helps users discover products and connect directly with sellers through Instagram.",
+    image: "/images/projects/instabazaar.png",
+    layout: "image-right",
+  },
+  {
+    name: "HeartWorkers",
+    cat: "VOLUNTEER PLATFORM",
+    description:
+      "A full-stack platform connecting volunteers and NGOs, built to make discovering and participating in volunteer opportunities easier.",
+    image: "/images/projects/heartworkers.png",
+    layout: "image-left",
+  },
+] as const;
+
+const projectCardRadius  = "rounded-[28px] sm:rounded-[36px] md:rounded-[48px]";
+
+type Project = (typeof portfolioProjects)[number];
+
+const Card = ({
+  p,
+  i,
+  n,
+  progress,
+}: {
+  p: Project;
+  i: number;
+  n: number;
+  progress: MotionValue<number>;
+}) => {
+const target = 1 - (n - 1 - i) * 0.3;
+const scale = useTransform(progress, [i / n, (i + 1) / n], [1, target]);
+  const imageOnRight = p.layout === "image-right";
+
   return (
-    <div className="sticky h-[85vh] [--t:6rem] md:[--t:8rem]" style={{ top: `calc(var(--t) + ${i * 28}px)` }}>
-      <motion.div className={`border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8 origin-top ${R}`} style={{ scale }}>
-        <div className="flex items-center gap-3 sm:gap-6 mb-3 sm:mb-5 text-[#D7E2EA]">
-          <span className="font-black leading-none" style={{ fontSize: 'clamp(2.5rem, 7vw, 100px)' }}>{`0${i + 1}`}</span>
-          <div className="flex-1 flex flex-col gap-1">
-            <p className="font-bold uppercase tracking-wide leading-none" style={{ fontSize: 'clamp(0.8rem, 1.6vw, 1.5rem)' }}>{p.cat}</p>
-            <h3 className="font-normal leading-none opacity-90" style={{ fontSize: 'clamp(0.75rem, 1.2vw, 1.1rem)' }}>{p.name}</h3>
+    <div
+      className="sticky h-[78vh] min-h-[540px] sm:h-[82vh] md:h-[85vh] [--t:5rem] md:[--t:7rem]"
+      style={{
+top: `calc(var(--t) + ${i * 12}px)`,
+        zIndex: i + 1,
+      }}
+    >
+      <motion.article
+        style={{ scale }}
+className={`flex h-full w-full items-stretch overflow-hidden border border-[#D7E2EA]/50 bg-[#0C0C0C] p-4 sm:p-6 md:p-8 ${projectCardRadius} origin-top`}      >
+        <div
+          className={`grid min-h-0 grid-cols-1 items-center gap-5 sm:gap-7 md:grid-cols-2 md:gap-10 ${
+            imageOnRight ? "md:[&>*:first-child]:order-2" : ""
+          }`}
+        >
+          {/* Project screenshot */}
+          <div className="relative overflow-hidden rounded-2xl bg-[#171717]">
+            <img
+              src={p.image}
+              alt={`${p.name} project screenshot`}
+              loading={i === 0 ? "eager" : "lazy"}
+className="h-full min-h-[280px] w-full object-cover md:min-h-0"            />
           </div>
-          <div className="hidden sm:block"><LiveProjectButton /></div>
-        </div>
-        <div className="flex gap-3">
-          <div className="flex flex-col gap-3" style={{ width: '40%' }}>
-            <img src={img(p.a)} alt="" loading="lazy" className={`w-full object-cover ${R}`} style={{ height: 'clamp(130px, 16vw, 230px)' }} />
-            <img src={img(p.b)} alt="" loading="lazy" className={`w-full object-cover ${R}`} style={{ height: 'clamp(160px, 22vw, 340px)' }} />
+
+          {/* Project details */}
+          <div className="flex min-w-0 flex-col justify-center text-[#D7E2EA]">
+            <div className="mb-4 flex items-center justify-between gap-3 sm:mb-6">
+              <span className="text-xs font-medium tracking-[0.2em] text-[#8C9AA4] sm:text-sm">
+                PROJECT / {String(i + 1).padStart(2, "0")}
+              </span>
+
+              <span className="text-[9px] font-medium tracking-[0.15em] text-[#8C9AA4] sm:text-[10px]">
+                {p.cat}
+              </span>
+            </div>
+
+            <h3
+              className="font-black leading-[0.95] tracking-tight"
+              style={{
+                fontSize: "clamp(2rem, 4.5vw, 4.5rem)",
+                overflowWrap: "anywhere",
+              }}
+            >
+              {p.name}
+            </h3>
+
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-[#AAB5BD] sm:mt-6 sm:text-base md:text-lg">
+              {p.description}
+            </p>
+
+            <div className="mt-6 h-px w-full bg-[#D7E2EA]/20 sm:mt-8" />
+
+            
           </div>
-          <img src={img(p.c)} alt="" loading="lazy" className={`object-cover ${R}`} style={{ width: '60%' }} />
         </div>
-      </motion.div>
+      </motion.article>
     </div>
   );
 };
 
 const Projects = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+  const githubScale = useTransform(
+  scrollYProgress,
+  [portfolioProjects.length / (portfolioProjects.length + 1), 1],
+  [1, 1]
+);
+
   return (
-    <section id="projects" className="relative z-10 bg-[#0C0C0C] -mt-10 sm:-mt-12 md:-mt-14 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32">
-      <h2 className="hero-heading font-black uppercase leading-none tracking-tight text-center mb-16 sm:mb-20 md:mb-28" style={bigHead}>Project</h2>
-      <div ref={ref}>
-        {projects.map((p, i) => <Card key={p.name} p={p} i={i} n={projects.length} progress={scrollYProgress} />)}
+    <section
+      id="projects"
+      className={`relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-5 py-20 text-[#D7E2EA] sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:-mt-14 md:rounded-t-[60px] md:px-10 md:py-32`}
+    >
+      <div className="mx-auto max-w-7xl">
+        <h2
+          className="hero-heading mb-5 text-center font-black uppercase leading-none tracking-tight"
+          style={bigHead}
+        >
+           Projects
+        </h2>
+
+        <p className="mx-auto mb-14 max-w-lg text-center text-sm leading-relaxed text-[#8C9AA4] sm:mb-20 md:mb-24">
+          A selection of things I have built, explored, and learned along the way.
+        </p>
+
+        <div ref={ref} className="relative">
+          {portfolioProjects.map((p, i) => (
+            <Card
+              key={p.name} 
+              p={p}
+              i={i}
+              n={portfolioProjects.length + 1}
+              progress={scrollYProgress}
+            />
+          ))}
+
+          {/* Final GitHub card */}
+          <div
+            className="sticky h-[78vh] min-h-[400px] sm:h-[82vh] md:h-[85vh] [--t:5rem] md:[--t:7rem]"
+            style={{
+              top: `calc(var(--t) + ${portfolioProjects.length * 22}px)`,
+              zIndex: portfolioProjects.length + 1,
+            }}
+          >
+            <motion.div
+  style={{ scale: githubScale }}
+  className={`flex h-full flex-col items-center justify-center border border-[#D7E2EA]/50 bg-[#0C0C0C] px-6 text-center ${projectCardRadius}`}
+>
+              <span className="mb-6 text-xs tracking-[0.25em] text-[#8C9AA4]">
+                THAT'S NOT ALL
+              </span>
+
+              <h3
+                className="max-w-3xl font-black uppercase leading-[0.9] tracking-tight"
+                style={{ fontSize: "clamp(2.5rem, 8vw, 7rem)" }}
+              >
+                Explore
+                <br />
+                More.
+              </h3>
+
+              <p className="mt-6 max-w-sm text-sm leading-relaxed text-[#AAB5BD] sm:text-base">
+                More experiments, repositories, and projects live on my GitHub.
+              </p>
+
+              <a
+                href="https://github.com/Nishchaymodi8"
+                target="_blank"
+                rel="noreferrer"
+                className="mt-8 inline-flex items-center gap-3 border-b border-[#D7E2EA]/50 pb-2 text-sm font-medium transition-colors hover:border-[#D7E2EA] hover:text-white"
+              >
+                Explore GitHub <span aria-hidden="true">↗</span>
+              </a>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
+
+const Contact = () => {
+  return (
+    <footer
+      id="contact"
+      className="relative overflow-hidden bg-[#0C0C0C] px-5 pb-6 pt-20 text-[#D7E2EA] sm:px-8 sm:pt-28 md:px-10 md:pt-36"
+    >
+      <div className="mx-auto max-w-7xl">
+        {/* Contact heading */}
+        <p className="mb-6 text-xs tracking-[0.3em] text-[#8C9AA4]">
+          HAVE A PROJECT IN MIND?
+        </p>
+
+        <h2
+          className="max-w-5xl font-black uppercase leading-[0.85] tracking-tight"
+          style={{ fontSize: "clamp(3.5rem, 10vw, 9rem)" }}
+        >
+          LET'S
+          <br />
+          BUILD
+          <br />
+          <span className="font-serif font-normal italic">Something.</span>
+        </h2>
+
+        <div className="mt-10 flex flex-col justify-between gap-8 border-t border-[#D7E2EA]/20 py-8 md:mt-14 md:flex-row md:items-end">
+          <div>
+            <p className="mb-3 text-sm text-[#8C9AA4]">
+              Have an opportunity or just want to connect?
+            </p>
+
+            <a
+  href="mailto:Nishchaymodi8@gmail.com"
+  className="break-all text-lg transition-colors hover:text-white sm:text-2xl"
+>
+  Nishchaymodi8@gmail.com ↗
+</a>
+          </div>
+
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="https://github.com/Nishchaymodi8"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-[#D7E2EA]/30 px-5 py-3 text-sm transition-colors hover:bg-[#D7E2EA] hover:text-[#0C0C0C]"
+            >
+              GitHub ↗
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/nishchaymodi/"
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-[#D7E2EA]/30 px-5 py-3 text-sm transition-colors hover:bg-[#D7E2EA] hover:text-[#0C0C0C]"
+            >
+              LinkedIn ↗
+            </a>
+          </div>
+        </div>
+
+        {/* Footer bottom */}
+        <div className="flex flex-col justify-between gap-3 border-t border-[#D7E2EA]/20 py-5 text-xs text-[#8C9AA4] sm:flex-row sm:items-center">
+          <p>© {new Date().getFullYear()} Nishchay Modi. All rights reserved.</p>
+
+          <a
+            href="#top"
+            className="w-fit transition-colors hover:text-white"
+          >
+            BACK TO TOP ↑
+          </a>
+
+          <p>DESIGNED & BUILT WITH CARE.</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
 
 export default function App() {
   useEffect(() => {
@@ -808,8 +1047,8 @@ export default function App() {
     return () => { cancelAnimationFrame(raf); lenis.destroy(); };
   }, []);
   return (
-    <main id="contact" className="bg-[#0C0C0C] font-kanit" style={{ overflowX: 'clip' }}>
-      <Hero /><Marquee /><About /><Services /><Projects />
+<main id="top" className="bg-[#0C0C0C] font-kanit" style={{ overflowX: 'clip' }}>
+        <Hero /><Marquee /><About /><Services /><Projects /><Contact />
     </main>
   );
 }
