@@ -1,11 +1,4 @@
-/* ==========================================================================
-   ALEX JAMES - EDITORIAL PORTFOLIO STYLESHEET
-   Clean, Minimal, Spacious, Typography-Focused Architecture
-   ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. CSS VARIABLES (Easily editable color palette & design tokens)
-   -------------------------------------------------------------------------- */
 :root {
     --bg-color: #EAF6FC;          /* Signature pale ice-blue page background */
     --text-color: #07152F;        /* Deep navy editorial heading & body text */

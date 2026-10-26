@@ -15,29 +15,6 @@ const FadeIn = ({ children, delay = 0, duration = 0.7, x = 0, y = 30, as = 'div'
   );
 };
 
-const Magnet = ({ children, padding = 100, strength = 2, activeTransition = 'transform 0.3s ease-out', inactiveTransition = 'transform 0.6s ease-in-out', className }:
-  { children: ReactNode; padding?: number; strength?: number; activeTransition?: string; inactiveTransition?: string; className?: string }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  useEffect(() => {
-    const move = (e: MouseEvent) => {
-      if (!ref.current) return;
-      const { left, top, width, height } = ref.current.getBoundingClientRect();
-      const cx = left + width / 2, cy = top + height / 2;
-      if (Math.abs(cx - e.clientX) < width / 2 + padding && Math.abs(cy - e.clientY) < height / 2 + padding) {
-        setActive(true); setPos({ x: (e.clientX - cx) / strength, y: (e.clientY - cy) / strength });
-      } else { setActive(false); setPos({ x: 0, y: 0 }); }
-    };
-    window.addEventListener('mousemove', move);
-    return () => window.removeEventListener('mousemove', move);
-  }, [padding, strength]);
-  return (
-    <div ref={ref} className={className}>
-      <div style={{ transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`, transition: active ? activeTransition : inactiveTransition, willChange: 'transform' }}>{children}</div>
-    </div>
-  );
-};
 
 const Char = ({ c, i, n, p }: { c: string; i: number; n: number; p: MotionValue<number> }) => {
   const o = useTransform(p, [i / n, (i + 1) / n], [0.2, 1]);
@@ -63,24 +40,9 @@ const AnimatedText = ({ text, className, style }: { text: string; className?: st
     </p>
   );
 };
-
-const ContactButton = () => (
-  <button className="rounded-full text-white font-medium uppercase tracking-widest px-8 py-3 sm:px-10 sm:py-3.5 md:px-12 md:py-4 text-xs sm:text-sm md:text-base"
-    style={{ background: 'linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%)',
-      boxShadow: '0px 4px 4px rgba(181, 1, 167, 0.25), 4px 4px 12px #7721B1 inset', outline: '2px solid white', outlineOffset: '-3px' }}>
-    Contact Me
-  </button>
-);
-const LiveProjectButton = () => (
-  <button className="rounded-full border-2 border-[#D7E2EA] text-[#D7E2EA] font-medium uppercase tracking-widest px-8 py-3 sm:px-10 sm:py-3.5 text-sm sm:text-base hover:bg-[#D7E2EA]/10 transition-colors duration-200 inline-flex items-center gap-2">
-    Live Project <ArrowUpRight size={18} />
-  </button>
-);
-
-
-const bigNum: CSSProperties = { fontSize: 'clamp(3rem, 10vw, 140px)' };
-const bigHead: CSSProperties = { fontSize: 'clamp(3rem, 12vw, 160px)' };
-
+const bigHead: CSSProperties = {
+  fontSize: 'clamp(3rem, 16vw, 240px)',
+};
 /* ---------- sections ---------- */
 const Hero = () => (
 <section className="relative h-[72vh] min-h-[360px] sm:h-[70vh] md:h-[80vh] flex flex-col overflow-x-clip">   <FadeIn y={-20}>
@@ -101,16 +63,19 @@ const Hero = () => (
     ))}
   </nav>
 </FadeIn>
-    <div className="overflow-hidden">
-      <FadeIn delay={0.6} y={30}>
-        <h1 className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full mt-8 sm:mt-4 md:-mt-5 text-[18.5vw] sm:text-[15vw] md:text-[16vw] lg:text-[17.5vw]">
-          Nishchay
-        </h1>
-      </FadeIn>
-    </div>
-    <div className="absolute left-1/2 -translate-x-1/2 z-10 top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0">
-      
-    </div>
+    
+<div className="w-full overflow-hidden">
+  <FadeIn delay={0.6} y={30}>
+   <h1
+  className="hero-heading mt-8 w-full text-left pl-[0vw] font-black uppercase leading-none tracking-tight whitespace-nowrap sm:mt-4 md:-mt-2"
+  style={bigHead}
+>
+  Nishchay
+</h1>
+  </FadeIn>
+</div>
+
+    
     <div className="mt-auto flex justify-between items-end px-6 md:px-10 pb-5 sm:pb-8 md:pb-10">
       <FadeIn delay={0.25} y={20}>
         <p className="text-[#D7E2EA] font-light uppercase tracking-wide leading-snug max-w-[250px] sm:max-w-[220px] md:max-w-[260px]" style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}>
@@ -123,29 +88,28 @@ const Hero = () => (
   </section>
 );
 
-const G = 'https://motionsites.ai/assets/hero-';
-//const gifs = ['space-voyage-preview-eECLH3Yc','codenest-preview-Cgppc2qV','vex-ventures-preview-BczMFIiw','stellar-ai-v2-preview-DjvxjG3C','asme-preview-B_nGDnTP','transform-data-preview-Cx5OU29N','vitara-preview-Cjz2QYyU','terra-preview-BFjrCr7T','skyelite-preview-DHaZIgUv','aethera-preview-DknSlcTa','designpro-preview-D8c5_een','stellar-ai-preview-D3HL6bw1','xportfolio-preview-D4A8maiC','orbit-web3-preview-BXt4OttD','nexora-preview-cx5HmUgo','evr-ventures-preview-DZxeVFEX','planet-orbit-preview-DWAP8Z1P','new-era-preview-CocuDUm9','wealth-preview-B70idl_u','luminex-preview-CxOP7ce6','celestia-preview-0yO3jXO8'].map((s) => `${G}${s}.gif`);
-//const row1 = gifs.slice(0, 11), row2 = gifs.slice(11);
+
 const row1 = [
-  "/tech/python.svg",
-  "/tech/django.svg",
-  "/tech/react.svg",
-  "/tech/typescript.svg",
-  "/tech/nextdotjs.svg",
-  "/tech/javascript.svg",
-  "/tech/html5.svg",
+  `${import.meta.env.BASE_URL}tech/python.svg`,
+  `${import.meta.env.BASE_URL}tech/django.svg`,
+  `${import.meta.env.BASE_URL}tech/react.svg`,
+  `${import.meta.env.BASE_URL}tech/typescript.svg`,
+  `${import.meta.env.BASE_URL}tech/nextdotjs.svg`,
+  `${import.meta.env.BASE_URL}tech/javascript.svg`,
+  `${import.meta.env.BASE_URL}tech/html5.svg`,
 ];
 
 const row2 = [
-  "/tech/postgresql.svg",
-  "/tech/mongodb.svg",
-  "/tech/mysql.svg",
-  "/tech/nodedotjs.svg",
-  "/tech/tailwindcss.svg",
-  "/tech/git.svg",
-  "/tech/github.svg",
-  "/tech/ollama.svg",
+  `${import.meta.env.BASE_URL}tech/postgresql.svg`,
+  `${import.meta.env.BASE_URL}tech/mongodb.svg`,
+  `${import.meta.env.BASE_URL}tech/mysql.svg`,
+  `${import.meta.env.BASE_URL}tech/nodedotjs.svg`,
+  `${import.meta.env.BASE_URL}tech/tailwindcss.svg`,
+  `${import.meta.env.BASE_URL}tech/git.svg`,
+  `${import.meta.env.BASE_URL}tech/github.svg`,
+  `${import.meta.env.BASE_URL}tech/ollama.svg`,
 ];
+
 const Marquee = () => {
   const ref = useRef<HTMLElement>(null);
   const [offset, setOffset] = useState(0);
@@ -184,16 +148,6 @@ className="bg-[#0C0C0C] pt-6 sm:pt-20 pb-12 sm:pb-36 overflow-hidden flex flex-c
   </section>
 );
 };
-
-
-const CDN = 'https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/';
-const corners = [
-  { src: 'moon_icon.11395d36.png', c: 'w-[120px] sm:w-[160px] md:w-[210px]', p: 'top-[4%] left-[1%] sm:left-[2%] md:left-[4%]', d: 0.1, x: -80 },
-  { src: 'p59_1.4659672e.png', c: 'w-[100px] sm:w-[140px] md:w-[180px]', p: 'bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%]', d: 0.25, x: -80 },
-  { src: 'lego_icon-1.703bb594.png', c: 'w-[120px] sm:w-[160px] md:w-[210px]', p: 'top-[4%] right-[1%] sm:right-[2%] md:right-[4%]', d: 0.15, x: 80 },
-  { src: 'Group_134-1.2e04f3ce.png', c: 'w-[130px] sm:w-[170px] md:w-[220px]', p: 'bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%]', d: 0.3, x: 80 },
-];
-
 
 const About = () => {
   const [flipped, setFlipped] = useState(false);
@@ -407,13 +361,15 @@ const About = () => {
 
                     <div className="flex flex-1 flex-col items-center px-5 pt-6">
                       {/* Photo placeholder */}
-                      <div className="flex h-[125px] w-[112px] items-center  justify-center overflow-hidden rounded-xl border-2 border-[#D9DDE3] bg-[#E8EAED]">
+                      
+<div className="flex h-[125px] w-[112px] items-center justify-center overflow-hidden rounded-xl border-2 border-[#D9DDE3] bg-[#E8EAED]">
   <img
-    src="/card/id2.jpg"
+    src={`${import.meta.env.BASE_URL}card/id2.jpg`}
     alt="Nishchay Modi"
-    className="h-full w-full object-cover  object-top"
+    className="h-full w-full object-cover object-top"
   />
 </div>
+
 
                       <h3 className="mt-4 text-center text-lg font-bold tracking-tight">
                         NISHCHAY MODI
@@ -769,30 +725,32 @@ const Services = () => {
 
 
 const portfolioProjects  = [
-  {
-    name: "CodeAtlas",
-    cat: "AI / DEVELOPER TOOLS",
-    description:
-      "An AI-powered codebase intelligence tool for repository chat, code summarization, and architecture analysis using RAG.",
-    image: "/images/projects/codeatlas.png",
-    layout: "image-left",
-  },
-  {
-    name: "InstaBazaar",
-    cat: "SOCIAL COMMERCE",
-    description:
-      "A marketplace for Instagram sellers that helps users discover products and connect directly with sellers through Instagram.",
-    image: "/images/projects/instabazaar.png",
-    layout: "image-right",
-  },
-  {
-    name: "HeartWorkers",
-    cat: "VOLUNTEER PLATFORM",
-    description:
-      "A full-stack platform connecting volunteers and NGOs, built to make discovering and participating in volunteer opportunities easier.",
-    image: "/images/projects/heartworkers.png",
-    layout: "image-left",
-  },
+  
+{
+  name: "CodeAtlas",
+  cat: "AI / DEVELOPER TOOLS",
+  description:
+    "An AI-powered codebase intelligence tool for repository chat, code summarization, and architecture analysis using RAG.",
+  image: `${import.meta.env.BASE_URL}images/projects/codeatlas.png`,
+  layout: "image-left",
+},
+{
+  name: "InstaBazaar",
+  cat: "SOCIAL COMMERCE",
+  description:
+    "A marketplace for Instagram sellers that helps users discover products and connect directly with sellers through Instagram.",
+  image: `${import.meta.env.BASE_URL}images/projects/instabazaar.png`,
+  layout: "image-right",
+},
+{
+  name: "HeartWorkers",
+  cat: "VOLUNTEER PLATFORM",
+  description:
+    "A full-stack platform connecting volunteers and NGOs, built to make discovering and participating in volunteer opportunities easier.",
+  image: `${import.meta.env.BASE_URL}images/projects/heartworkers.png`,
+  layout: "image-left",
+},
+
 ] as const;
 
 const projectCardRadius  = "rounded-[28px] sm:rounded-[36px] md:rounded-[48px]";
@@ -894,12 +852,9 @@ const Projects = () => {
       className={`relative z-10 -mt-10 rounded-t-[40px] bg-[#0C0C0C] px-5 py-20 text-[#D7E2EA] sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:-mt-14 md:rounded-t-[60px] md:px-10 md:py-32`}
     >
       <div className="mx-auto max-w-7xl">
-        <h2
-          className="hero-heading mb-5 text-center font-black uppercase leading-none tracking-tight"
-          style={bigHead}
-        >
-           Projects
-        </h2>
+       <h2 className="hero-heading mb-5 text-center font-black uppercase leading-none tracking-tight text-[clamp(2.5rem,10vw,10rem)]">
+  Projects
+</h2>
 
         <p className="mx-auto mb-14 max-w-lg text-center text-sm leading-relaxed text-[#8C9AA4] sm:mb-20 md:mb-24">
           A selection of things I have built, explored, and learned along the way.
